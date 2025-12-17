@@ -1,0 +1,52 @@
+/* Navbar container */
+.navbar-bread-form {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  opacity: 1;
+}
+
+/* Logo text */
+.navbar-bread-form h1 {
+  font-family: 'Boska-Medium';
+  font-size: 25px;
+  margin: 0;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.navbar-bread-form h1:hover {
+  color: #ffcc00; /* highlight on hover */
+}
+
+/* Hide on scroll down */
+.navbar-bread-form.hidden {
+  opacity: 0;
+  transform: translate(-50%, -40px); /* move up smoothly */
+  pointer-events: none;
+}
+
+/* Show on scroll up */
+.navbar-bread-form.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .navbar-bread-form h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-bread-form h1 {
+    font-size: 18px;
+  }
+}
