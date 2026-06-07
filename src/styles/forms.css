@@ -1,0 +1,44 @@
+
+.form-container {
+  flex: 1;
+  max-width: 450px;
+  background: #ffffff00;
+
+  padding: 10px;
+
+
+  text-align: center;
+}
+.form-group {
+  margin-bottom: 10px;
+  text-align: left;
+  padding: 14px;
+}
+.form-group.with-button {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+.select-wrapper {
+  flex: 1;
+}
+.select-box,
+.customSelectStyles {
+  font-family: 'Boska-Medium';
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  font-size: 16px;
+}
+.css-1nmdiq5-menu {
+  max-width: 293px;
+  color: #000;
+}
+.form-box label {
+  font-family: 'Boska-Bold';
+  display: block;
+  margin: 0px;
+  text-align: left;
+}

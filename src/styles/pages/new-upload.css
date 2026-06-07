@@ -1,0 +1,342 @@
+.new-upload-page {}
+
+.new-upload-header {
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  overflow: hidden;
+}
+
+.new-upload-header video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.new-upload-header nav,
+.new-upload-header .navbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 2;
+  background: transparent;
+}
+
+.new-upload-heading {
+  position: absolute;
+  top: 28%;
+  left: 1%;
+  transform: translateY(-50%);
+  font-family: 'Boska-Bold', serif;
+  color: rgba(41, 38, 38, 0.8);
+  font-size: clamp(36px, 8vw, 150px);
+  z-index: 2;
+  margin: 0;
+  letter-spacing: 4px;
+}
+
+.new-upload-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.upload-left {}
+
+.upload-right {}
+
+.image-tab-switcher {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.image-tab-btn {
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 1px solid #433b35;
+  background: transparent;
+  font-family: 'Boska-Medium', serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.image-tab-btn.active {
+  background: #433b35;
+  color: #fff;
+}
+
+.upload-dropzone {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 2px dashed rgba(67,59,53,0.3);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  background: #faf9f7;
+  transition: border 0.3s ease;
+}
+
+.upload-dropzone:hover {
+  border-color: #433b35;
+}
+
+.upload-placeholder {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+  font-family: 'Supreme-Regular', sans-serif;
+}
+
+.upload-icon {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 10px;
+  color: #433b35;
+}
+
+.upload-hint {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 8px;
+}
+
+.upload-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.url-input {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(67,59,53,0.3);
+  font-family: 'Supreme-Regular', sans-serif;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+}
+
+.upload-input {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(67,59,53,0.3);
+  font-family: 'Supreme-Regular', sans-serif;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  transition: border 0.3s ease;
+}
+
+.upload-input:focus {
+  border-color: #433b35;
+}
+
+.upload-textarea {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(67,59,53,0.3);
+  font-family: 'Supreme-Regular', sans-serif;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+  resize: vertical;
+  margin-bottom: 16px;
+  transition: border 0.3s ease;
+}
+
+.upload-textarea:focus {
+  border-color: #433b35;
+}
+
+.upload-select {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(67,59,53,0.3);
+  font-family: 'Supreme-Regular', sans-serif;
+  font-size: 15px;
+  outline: none;
+  background: #fff;
+  cursor: pointer;
+  margin-bottom: 16px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23433b35' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  padding-right: 44px;
+}
+
+.upload-label {
+  display: block;
+  font-family: 'Boska-Medium', serif;
+  font-size: 14px;
+  color: #433b35;
+  margin-bottom: 6px;
+}
+
+.product-item {
+  border: 1px solid #eaeaec;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background: #faf9f7;
+}
+
+.product-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.product-item-title {
+  font-family: 'Boska-Medium', serif;
+  font-size: 14px;
+  color: #433b35;
+}
+
+.remove-product-btn {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0;
+  line-height: 1;
+}
+
+.remove-product-btn:hover {
+  color: #e74c3c;
+}
+
+.product-image-preview {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.add-more-btn {
+  width: 100%;
+  padding: 12px;
+  border: 1px dashed rgba(67,59,53,0.4);
+  border-radius: 50px;
+  background: transparent;
+  font-family: 'Boska-Medium', serif;
+  font-size: 14px;
+  color: #433b35;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 24px;
+}
+
+.add-more-btn:hover {
+  background: #f0ece8;
+  border-color: #433b35;
+}
+
+.publish-btn {
+  width: 100%;
+  padding: 16px;
+  background: #433b35;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Boska-Bold', serif;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  letter-spacing: 1px;
+}
+
+.publish-btn:hover:not(:disabled) {
+  background: #000;
+}
+
+.publish-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .new-upload-content {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+}
+
+.multiselect-wrapper {
+  margin-bottom: 20px;
+}
+
+.multiselect-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.multiselect-chip {
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(67,59,53,0.3);
+  background: transparent;
+  font-family: 'Supreme-Regular', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #433b35;
+}
+
+.multiselect-chip.selected {
+  background: #433b35;
+  color: #fff;
+  border-color: #433b35;
+}
+
+.multiselect-chip:hover {
+  background: #f0ece8;
+  border-color: #433b35;
+}
+
+.multiselect-chip.selected:hover {
+  background: #000;
+}
+
+.platform-links-section {
+  margin-bottom: 20px;
+}
+
+.platform-link-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #eaeaec;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  background: #faf9f7;
+}
+
+.platform-select {
+  border-radius: 12px !important;
+}
+
+.products-section {
+  margin-bottom: 20px;
+}

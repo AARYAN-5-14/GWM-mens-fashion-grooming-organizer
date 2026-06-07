@@ -1,0 +1,214 @@
+.profile-page {}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #433b35;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-avatar-initials {
+  font-family: 'Boska-Bold', serif;
+  font-size: 36px;
+  color: #fff;
+}
+
+.profile-info {}
+
+.profile-name {
+  font-family: 'Boska-Bold', serif;
+  font-size: 24px;
+  color: #433b35;
+  margin: 0 0 4px 0;
+}
+
+.profile-email {
+  font-family: 'Supreme-Regular', sans-serif;
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+}
+
+.collections-section {
+  padding: 0 40px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.collections-title {
+  font-family: 'Boska-Bold', serif;
+  font-size: 20px;
+  color: #433b35;
+  margin-bottom: 16px;
+}
+
+.collection-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  border: 1px solid #eaeaec;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #faf9f7;
+  transition: all 0.2s ease;
+  max-width: 300px;
+}
+
+.collection-btn:hover {
+  background: #f0ece8;
+  border-color: #433b35;
+}
+
+.collection-icon {
+  font-size: 20px;
+  color: #e74c3c;
+}
+
+.collection-label {
+  font-family: 'Boska-Medium', serif;
+  font-size: 16px;
+  color: #433b35;
+  flex: 1;
+}
+
+.collection-arrow {
+  color: #888;
+  font-size: 16px;
+}
+
+.uploads-section {
+  padding: 0 40px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.uploads-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.uploads-title {
+  font-family: 'Boska-Bold', serif;
+  font-size: 22px;
+  color: #433b35;
+  margin: 0;
+}
+
+.add-new-btn {
+  padding: 10px 24px;
+  background: #433b35;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Boska-Medium', serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-new-btn:hover {
+  background: #000;
+}
+
+.uploads-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.upload-card {
+  aspect-ratio: 1;
+  overflow: hidden;
+  cursor: pointer;
+  background: #f0ece8;
+}
+
+.upload-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.upload-card:hover img {
+  transform: scale(1.05);
+}
+
+.no-uploads {
+  text-align: center;
+  padding: 60px 20px;
+  color: #888;
+  font-family: 'Supreme-Regular', sans-serif;
+}
+
+.no-uploads button {
+  margin-top: 16px;
+  padding: 12px 28px;
+  background: #433b35;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Boska-Medium', serif;
+  cursor: pointer;
+}
+
+.profile-header {
+  position: relative;
+  width: 100%;
+  height: 35vh;
+  overflow: hidden;
+}
+
+.profile-header video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.profile-header nav,
+.profile-header .navbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 2;
+  background: transparent;
+}
+
+.profile-heading {
+  position: absolute;
+  top: 80%;
+  left: 2%;
+  transform: translateY(-50%);
+  font-family: 'Boska-Bold', serif;
+  color: rgba(255, 255, 255, 0.852);
+  font-size: clamp(36px, 8vw, 150px);
+  text-align: left;
+  z-index: 2;
+  margin: 0;
+  letter-spacing: 4px;
+  font-style: normal;
+}

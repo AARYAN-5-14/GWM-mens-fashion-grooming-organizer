@@ -1,0 +1,130 @@
+
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  color: white;
+  text-align: center;
+}
+
+.content h1 {
+  font-family: 'Boska-Medium';
+  font-size: 160px;
+  margin: 0;
+  color: #442717fe;
+}
+
+.content p {
+  font-family: 'Panchang-Light';
+  font-size: 20px;
+  margin-top: -5px;
+  color: #ccc;
+}
+
+.category-label {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-align: center;
+  z-index: 2;
+}
+
+.category-label h2 {
+  font-family: 'Boska-Medium';
+  font-size: 24px;
+  margin: 0;
+  color: #ffffff;
+}
+
+.content_grooming,
+.content_clothing {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: rgba(247, 240, 208, 0.605);
+  text-align: center;
+}
+
+.content_clothing h1,
+.content_grooming h1 {
+
+  font-family: 'Boska-Bold';
+  font-size: 200px;
+ 
+  margin: 0;
+}
+
+.content_grooming p,
+.content_clothing p {
+  font-family: 'Telma-Regular';
+  font-size: 60px;
+  margin-top: -100px;
+  margin-bottom: 0px;
+  color: #f3c44e;
+  z-index: 2;
+}
+
+.category-label-grooming,
+.category-label-clothing {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-align: center;
+  z-index: 2;
+}
+
+.category-label-grooming h2,
+.category-label-clothing h2 {
+  font-family: 'Boska-Medium';
+  font-size: 24px;
+  margin: 0;
+  color: #f3c44e;
+}
+
+@media (max-width: 768px) {
+  .content_grooming h1 {
+    font-size: 80px;
+  }
+  .content_grooming p {
+    font-size: 28px;
+    margin-top: -40px;
+  }
+  .category-label-grooming h2 {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content_grooming h1 {
+    font-size: 42px;
+  }
+  .content_grooming p {
+    font-size: 16px;
+    margin-top: -18px;
+  }
+  .category-label-grooming h2 {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 360px) {
+  .content_grooming h1 {
+    font-size: 30px;
+  }
+  .content_grooming p {
+    font-size: 12px;
+    margin-top: -10px;
+  }
+  .category-label-grooming h2 {
+    font-size: 9px;
+  }
+}

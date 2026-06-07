@@ -1,0 +1,81 @@
+
+
+.main {
+  position: relative;
+  width: 100%;
+  display: block;
+  background-color:    #f5f5f3;
+
+  min-height: auto;
+  overflow: hidden;
+}
+.heading {
+  position: relative;
+  width: 100%;
+  height: 35vh;
+  /* video height = 30% of viewport height */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .heading {
+    height: 25vh;
+  }
+}
+@media (max-width: 480px) {
+  .heading {
+    height: 20vh;
+  }
+}
+@media (max-width: 768px) {
+  .heading {
+    height: 25vh;
+  }
+}
+@media (max-width: 480px) {
+  .heading {
+    height: 20vh;
+  }
+}
+.info-scroll-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+@media (max-width: 768px) {
+  .info-scroll-container {
+    top: 15px;
+    left: 15px;
+  }
+}
+@media (max-width: 480px) {
+  .info-scroll-container {
+    top: 12px;
+    left: 12px;
+  }
+}
+@media (max-width: 1024px) {
+  .info-scroll-container {
+    top: 15px;
+    left: 15px;
+  }
+}
+@media (max-width: 768px) and (max-height: 1024px) {
+  .info-scroll-container {
+    top: 15px;
+    left: 15px;
+  }
+}
+@media (max-width: 480px) {
+  .info-scroll-container {
+    top: 12px;
+    left: 12px;
+  }
+}

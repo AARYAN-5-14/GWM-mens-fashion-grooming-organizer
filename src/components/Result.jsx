@@ -1,1001 +1,167 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import Clean from "../assets/Clean.jpeg";
-import ItalianBeard from '../assets/Balbo.jpeg';
-import Stubble from '../assets/Stubble.jpeg';
-import Goatee from '../assets/Goatee.jpeg';
-import Anchor from '../assets/Anchor.jpeg';
-import ChinStrap from '../assets/Chin Strap.jpeg';
 import NavbarLogo from "./NavbarLogo"; 
-import party from "../assets/party.mp4";
+import partyVideo from "../assets/party.mp4";
+import formalVideo from "../assets/formal.mp4";
+import dateVideo from "../assets/date.mp4";
+import familyVideo from "../assets/family_gathering.mp4";
 import "../index.css";
-// ✅ Results Data (add all 28 combos here)
-
-const beardResults = {
-  "round_uneven_patch_light": {
-    title: "Round Face + Uneven Patch Beard + Light Volume",
-    products: [
-      {
-        img: Stubble,
-        link: "https://youtu.be/Q4rVRhcz8uk?si=FRD3rfgPantgEP2H",
-        name: "Stubble",
-      },
-      {
-        img: Clean,
-        link: "https://youtube.com/shorts/XHwfY9zBWNc?si=c8GNsXpo1Milc6Xa",
-        name: "Clean Shaven",
-      },
-      {
-        img: ItalianBeard,
-        link: "https://youtu.be/8JWLQHqurf0?si=JvZavYoH-ERfyBuc",
-        name: "Italian Beard",
-      },
-      {
-        img: Anchor,
-        link: "https://youtu.be/tXJkP2PUyPI?si=4ppNFPoT-r6-fskT",
-        name: "Anchor Beard",
-      },
-      {
-        img: ChinStrap,
-        link: "https://www.myntra.com/beard-oil",
-        name: "Chin Strap Beard",
-      },
-      {
-        img: Goatee,
-        link: "https://www.myntra.com/beard-oil",
-        name: "Goatee Beard",
-      },
-    ],
-  },
-  "round_uneven_patch_medium": {
-    title: "round_uneven_patch_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "round_uneven_patch_dense": {
-    title: "round_uneven_patch_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-  "round_light_cheeks_light": {
-    title: "Round_Light_on_cheeks_Light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "round_light_cheeks_medium": {
-    title: "Round_Light on cheeks_Medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "round_light_cheeks_dense": {
-    title: "Round_Light on cheeks_Dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "round_chin_only_light": {
-    title: "Round_On chin only_Light",
-    products: [
-      {
-        img: Goatee,
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: ItalianBeard,
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "round_chin_only_medium": {
-    title: "Oval Face + Chin Only Beard",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "round_chin_only_dense": {
-    title: "round_chin_only_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "round_light_connection_light": {
-    title: "round_light_connection_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "round_light_connection_medium": {
-    title: "round_light_connection_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "round_light_connection_dense": {
-    title: "round_light_connection_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "long_uneven_patch_light": {
-    title: "Square Face + Light Cheeks Beard",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "long_uneven_patch_medium": {
-    title: "long_uneven_patch_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "long_uneven_patch_dense": {
-    title: "long_uneven_patch_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "long_light_cheeks_light": {
-    title: "long_light_cheeks_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "long_light_cheeks_medium": {
-    title: "long_light_cheeks_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "long_light_cheeks_dense": {
-    title: "long_light_cheeks_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "long_chin_only_light": {
-    title: "long_chin_only_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "long_chin_only_medium": {
-    title: "long_chin_only_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "long_chin_only_dense": {
-    title: "long_chin_only_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "long_light_connection_light": {
-    title: "long_light_connection_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "long_light_connection_medium": {
-    title: "long_light_connection_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "long_light_connection_dense": {
-    title: "long_light_connection_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "oval_uneven_patch_light": {
-    title: "oval_uneven_patch_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "oval_uneven_patch_medium": {
-    title: "oval_uneven_patch_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "oval_uneven_patch_dense": {
-    title: "oval_uneven_patch_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "oval_light_cheeks_light": {
-    title: "oval_light_cheeks_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "oval_light_cheeks_medium": {
-    title: "oval_light_cheeks_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "oval_light_cheeks_dense": {
-    title: "oval_light_cheeks_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "oval_chin_only_light": {
-    title: "oval_chin_only_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "oval_chin_only_medium": {
-    title: "oval_chin_only_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "oval_chin_only_dense": {
-    title: "oval_chin_only_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "oval_light_connection_light": {
-    title: "oval_light_connection_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "oval_light_connection_medium": {
-    title: "oval_light_connection_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "oval_light_connection_dense": {
-    title: "oval_light_connection_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "square_uneven_patch_light": {
-    title: "square_uneven_patch_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "square_uneven_patch_medium": {
-    title: "square_uneven_patch_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "square_uneven_patch_dense": {
-    title: "square_uneven_patch_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "square_light_cheeks_light": {
-    title: "square_light_cheeks_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "square_light_cheeks_medium": {
-    title: "square_light_cheeks_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-   "square_light_cheeks_dense": {
-    title: "square_light_cheeks_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "square_chin_only_light": {
-    title: "square_chin_only_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "square_chin_only_medium": {
-    title: "square_chin_only_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "square_chin_only_dense": {
-    title: "square_chin_only_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "square_light_connection_light": {
-    title: "square_light_connection_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "square_light_connection_medium": {
-    title: "square_light_connection_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "square_light_connection_dense": {
-    title: "square_light_connection_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "heart_uneven_patch_light": {
-    title: "heart_uneven_patch_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "heart_uneven_patch_medium": {
-    title: "heart_uneven_patch_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "heart_uneven_patch_dense": {
-    title: "heart_uneven_patch_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "heart_light_cheeks_light": {
-    title: "heart_light_cheeks_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "heart_light_cheeks_medium": {
-    title: "heart_light_cheeks_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "heart_light_cheeks_dense": {
-    title: "heart_light_cheeks_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-   "heart_chin_only_light": {
-    title: "heart_chin_only_light",
-    products: [
-      {
-        img: Stubble,
-        link: "https://youtu.be/Q4rVRhcz8uk?si=FRD3rfgPantgEP2H",
-        name: "Stubble",
-      },
-      {
-        img: Clean,
-        link: "https://youtube.com/shorts/XHwfY9zBWNc?si=c8GNsXpo1Milc6Xa",
-        name: "Clean Shaven",
-      },
-      {
-        img: ItalianBeard,
-        link: "https://youtu.be/8JWLQHqurf0?si=JvZavYoH-ERfyBuc",
-        name: "Italian Beard",
-      },
-      {
-        img: Anchor,
-        link: "https://youtu.be/tXJkP2PUyPI?si=4ppNFPoT-r6-fskT",
-        name: "Anchor Beard",
-      },
-      {
-        img: ChinStrap,
-        link: "https://www.myntra.com/beard-oil",
-        name: "Chin Strap Beard",
-      },
-      {
-        img: Goatee,
-        link: "https://www.myntra.com/beard-oil",
-        name: "Goatee Beard",
-      },
-    ],
-  },
-  "heart_chin_only_medium": {
-    title: "heart_chin_only_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "heart_chin_only_dense": {
-    title: "heart_chin_only_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "heart_light_connection_light": {
-    title: "heart_light_connection_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "heart_light_connection_medium": {
-    title: "heart_light_connection_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "heart_light_connection_dense": {
-    title: "heart_light_connection_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "diamond_uneven_patch_light": {
-    title: "diamond_uneven_patch_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "diamond_uneven_patch_medium": {
-    title: "diamond_uneven_patch_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "diamond_uneven_patch_dense": {
-    title: "diamond_uneven_patch_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "diamond_light_cheeks_light": {
-    title: "diamond_light_cheeks_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "diamond_light_cheeks_medium": {
-    title: "diamond_light_cheeks_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "diamond_light_cheeks_dense": {
-    title: "diamond_light_cheeks_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "diamond_chin_only_light": {
-    title: "diamond_chin_only_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "diamond_chin_only_medium": {
-    title: "diamond_chin_only_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "diamond_chin_only_dense": {
-    title: "diamond_chin_only_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "diamond_light_connection_light": {
-    title: "diamond_light_connection_light",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-  "diamond_light_connection_medium": {
-    title: "diamond_light_connection_medium",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Brush",
-        link: "https://www.amazon.in/beard-brush",
-        name: "Beard Brush",
-      },
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Beard+Shampoo",
-        link: "https://www.amazon.in/beard-shampoo",
-        name: "Beard Shampoo",
-      },
-    ],
-  },
-    "diamond_light_connection_dense": {
-    title: "diamond_light_connection_dense",
-    products: [
-      {
-        img: "https://via.placeholder.com/200x250.png?text=Goatee+Kit",
-        link: "https://www.amazon.in/mens-grooming",
-        name: "Goatee Kit",
-      },
-    ],
-  },
-
-  
-};
+import InfoButton from './layout/InfoButton';
+import Footer from './layout/Footer';
+import ProfilePopup from './layout/ProfilePopup';
+import { beardRecommendations } from "../data/recommendations";
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../firebase/config';
 
 const Result = () => {
   const { combination } = useParams();
-  const result = beardResults[combination];
+  const result = beardRecommendations[combination];
 
-  if (!result) {
-    return (
-      <div className="result-container">
-        <NavbarLogo />
-        <h1>No result found for {combination}</h1>
-      </div>
-    );
-  }
+  const getVideoFromCombination = (combination) => {
+    if (!combination) return partyVideo;
+    if (combination.includes('formal')) return formalVideo;
+    if (combination.includes('date')) return dateVideo;
+    if (combination.includes('family')) return familyVideo;
+    if (combination.includes('party')) return partyVideo;
+    // Default for grooming without occasion in key
+    return partyVideo;
+  };
+
+  const bgVideo = getVideoFromCombination(combination);
+
+  const [visibleCount, setVisibleCount] = useState(25);
+  const [firestoreMatches, setFirestoreMatches] = useState([]);
+  const [firestoreLoading, setFirestoreLoading] = useState(true);
+  const sentinelRef = useRef(null);
+  const footerRef = useRef(null);
+
+  const staticProducts = result ? result.products : [];
+  const allProducts = [...staticProducts, ...firestoreMatches];
+
+  const scrollToFooter = () => {
+    footerRef.current?.scrollIntoView({ 
+      behavior: 'smooth' 
+    });
+  };
+
+  useEffect(() => {
+    if (!combination) return;
+    
+    const fetchMatchingUploads = async () => {
+      try {
+        setFirestoreLoading(true);
+        const q = query(
+          collection(db, 'uploads'),
+          where('resultKeys', 'array-contains', combination)
+        );
+        const snapshot = await getDocs(q);
+        const matches = snapshot.docs.map(doc => ({
+          id: doc.id,
+          img: doc.data().mainImage,
+          name: doc.data().title,
+          link: null, // no direct link for uploads
+          isFirestoreUpload: true
+        }));
+        setFirestoreMatches(matches);
+      } catch (error) {
+        console.error('Error fetching matching uploads:', error);
+      } finally {
+        setFirestoreLoading(false);
+      }
+    };
+    
+    fetchMatchingUploads();
+  }, [combination]);
+
+  // DEV NOTE: Pagination activates when a combination has 26+ 
+  // products. Currently all combinations have ≤6 products so 
+  // all items render in the first batch. Infinite scroll is 
+  // ready and will activate automatically as products are added
+  // to recommendations.js
+  useEffect(() => {
+    if (visibleCount >= allProducts.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setVisibleCount((prev) => prev + 25);
+      }
+    });
+
+    if (sentinelRef.current) {
+      observer.observe(sentinelRef.current);
+    }
+
+    return () => {
+      if (sentinelRef.current) {
+        observer.unobserve(sentinelRef.current);
+      }
+    };
+  }, [allProducts.length, visibleCount]);
 
   return (
     
     <div className="result-container">
+      <InfoButton onClick={scrollToFooter} />
+      <ProfilePopup />
       <NavbarLogo />
       <div className="heading">
       
- <div className="background-video-result">
-          <video src={party} autoPlay loop muted playsInline />
+        <div className="background-video-result">
+          <video src={bgVideo} autoPlay loop muted playsInline />
           <h2>RESULTS</h2>
         </div>
         </div>
-        <h1 className="result-title">{result.title}</h1>
       
       <div className="result-grid">
-        {result.products.map((item, index) => (
-          <a
-            key={index}
-            href={item.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="result-card"
-          >
-            <img src={item.img} alt={item.name} className="result-img" />
-            <p className="result-name">{item.name}</p>
-          </a>
-        ))}
+        {allProducts.length === 0 && !firestoreLoading ? (
+          <div className="result-empty">
+            <p>No looks found for this combination yet.</p>
+            <p>Check back soon as creators add more content.</p>
+          </div>
+        ) : (
+          allProducts.slice(0, visibleCount).map((item, index) => (
+            item.isFirestoreUpload ? (
+              // Firestore upload card — opens ProductDetail
+              <div
+                key={item.id}
+                className="result-card"
+                style={{cursor: 'pointer'}}
+                onClick={() => window.open(
+                  `/product/${item.id}`, '_blank'
+                )}
+              >
+                <img src={item.img} alt={item.name} 
+                     className="result-img" />
+              </div>
+            ) : (
+              // Static recommendation card — opens link
+              <a
+                key={index}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="result-card"
+              >
+                <img src={item.img} alt={item.name} 
+                     className="result-img" />
+              </a>
+            )
+          ))
+        )}
       </div>
+
+      {visibleCount < allProducts.length && (
+        <div className="loading-more">Loading more...</div>
+      )}
+      <div ref={sentinelRef} className="scroll-sentinel" />
+      
+      {allProducts.length > 0 && (
+        <p className="result-count">
+          Showing {allProducts.slice(0, visibleCount).length} of {allProducts.length}
+        </p>
+      )}
+      
+      <Footer ref={footerRef} />
     </div>
   );
 };

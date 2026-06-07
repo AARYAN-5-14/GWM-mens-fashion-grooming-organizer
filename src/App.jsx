@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import React, { useEffect, useState, useRef } from "react";
 import Loader from "./components/Loader.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -27,11 +28,11 @@ function App() {
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
-  return <>{loading ? <Loader /> : <Outlet />}</>;
+  return (
+    <AuthProvider>
+      {loading ? <Loader /> : <Outlet />}
+    </AuthProvider>
+  );
 }
 
 export default App;
-
-
-
-

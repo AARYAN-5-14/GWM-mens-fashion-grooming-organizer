@@ -1,0 +1,92 @@
+
+.hairform-layout,
+.beardform-layout {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 10px;
+  flex-wrap: wrap;
+  /* responsive */
+}
+.preview-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fafafa02;
+  border-radius: 12px;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.142);
+  min-height: 500px;
+}
+.preview-img {
+  max-width: 100%;
+  max-height: 480px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+@media (max-width: 768px) {
+
+  .beardform-layout,
+  .button-group {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+}
+
+.img-modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.img-modal-img {
+  max-width: 100%;
+  max-height: 85vh;
+  border-radius: 12px;
+  display: block;
+}
+
+.img-modal-close {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #433b35;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 768px) {
+
+  .beardform-layout,
+  .hairform-layout {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .preview-container {
+    margin-top: 20px;
+  }
+}
+
+.preview-img-clickable {
+  cursor: pointer;
+}

@@ -1,0 +1,195 @@
+.business-page {}
+
+.business-profile-section {
+  display: flex;
+  gap: 32px;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+.business-avatar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.business-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #433b35;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.business-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.business-avatar-initials {
+  font-family: 'Boska-Bold', serif;
+  font-size: 42px;
+  color: #fff;
+}
+
+.edit-avatar-btn {
+  padding: 6px 18px;
+  border: 1px solid #433b35;
+  border-radius: 20px;
+  background: transparent;
+  font-family: 'Boska-Medium', serif;
+  font-size: 13px;
+  color: #433b35;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.edit-avatar-btn:hover {
+  background: #433b35;
+  color: #fff;
+}
+
+.business-info {}
+
+.business-profile-name {
+  font-family: 'Boska-Bold', serif;
+  font-size: 26px;
+  color: #433b35;
+  margin: 0 0 6px 0;
+}
+
+.business-type-label {
+  font-family: 'Supreme-Regular', sans-serif;
+  font-size: 14px;
+  color: #888;
+  margin: 0 0 8px 0;
+}
+
+.business-website {
+  font-family: 'Supreme-Regular', sans-serif;
+  font-size: 14px;
+  color: #433b35;
+  text-decoration: none;
+}
+
+.business-website:hover {
+  text-decoration: underline;
+}
+
+.avatar-uploading {
+  font-family: 'Supreme-Regular', sans-serif;
+  font-size: 12px;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .business-profile-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .uploads-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.business-header {
+  position: relative;
+  width: 100%;
+  height: 35vh;
+  overflow: hidden;
+}
+
+.business-header video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.business-header nav,
+.business-header .navbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 2;
+  background: transparent;
+}
+
+.business-heading {
+  position: absolute;
+  top: 80%;
+  left: 1%;
+  transform: translateY(-50%);
+  font-family: 'Boska-Bold', serif;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: clamp(36px, 8vw, 150px);
+  text-align: left;
+  z-index: 2;
+  margin: 0;
+  letter-spacing: 4px;
+  font-style: normal;
+}
+
+.upload-card-wrapper {
+  position: relative;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.upload-card {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #f0ece8;
+  width: 100%;
+}
+
+.upload-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.upload-card-wrapper:hover .upload-card img {
+  transform: scale(1.03);
+}
+
+.analytics-btn {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-family: 'Boska-Medium', serif;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.25s ease, background 0.25s ease;
+  z-index: 3;
+  backdrop-filter: blur(4px);
+}
+
+.upload-card-wrapper:hover .analytics-btn {
+  opacity: 1;
+}
+
+.analytics-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}

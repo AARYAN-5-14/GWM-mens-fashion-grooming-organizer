@@ -1,61 +1,40 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useRef } from "react";
 import Select from "react-select";
-import { useNavigate, Outlet, Link, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { hairTypes, hairfallTypes, lengthOptions } from "../data/formOptions";
 import party from "../assets/party.mp4";
 import defaultImg from "../assets/Hair.jpeg";
-
+import HairPreview from './Hair-info-hairType.jsx';
+import HairfallPreview from './Hair-info-hairFallType.jsx';
+import Footer from './layout/Footer';
+import Navbar from './layout/Navbar';
+import ProfilePopup from './layout/ProfilePopup';
+import InfoButton from './layout/InfoButton';
 import "../index.css";
 
 const HairForm = () => {
   const navigate = useNavigate();
-  const location = useLocation();
+
+  const footerRef = useRef(null);
+
+  const scrollToFooter = () => {
+    footerRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   // State for form
   const [hairType, setHairType] = useState(null);
   const [hairfallPatch, setHairfallType] = useState(null);
   const [lengthOfHair, setLength] = useState(null);
 
-  // State for navbar visibility
-  const [showNavbar, setShowNavbar] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  // ✅ Scroll listener wrapped in useCallback
-  const controlNavbar = useCallback(() => {
-    if (window.scrollY > lastScrollY) {
-      setShowNavbar(false); // scrolling down → hide
-    } else {
-      setShowNavbar(true); // scrolling up → show
-    }
-    setLastScrollY(window.scrollY);
-  }, [lastScrollY]);
-
-  useEffect(() => {
-    window.addEventListener("scroll", controlNavbar);
-    return () => window.removeEventListener("scroll", controlNavbar);
-  }, [controlNavbar]);
+  // State for preview
+  const [preview, setPreview] = useState(null);
 
   // Options
-  const hairTypes = [
-    { value: "curly", label: "Curly" },
-    { value: "wavy", label: "Wavy" },
-    { value: "straight", label: "Straight" },
-    { value: "coily", label: "Coily" },
-    { value: "shaven", label: "Shaven" },
-  ];
+  
 
-  const hairfallTypes = [
-    { value: "none", label: "None" },
-    { value: "type_1", label: "Type 1" },
-    { value: "type_2", label: "Type 2" },
-    { value: "type_3", label: "Type 3" },
-    { value: "type_4", label: "Type 4" },
-  ];
+  
 
-  const lengthOptions = [
-    { value: "short", label: "Short" },
-    { value: "mid", label: "Medium" },
-    { value: "long", label: "Long" },
-  ];
+  
 
   const customSelectStyles = {
     control: (baseStyles) => ({
@@ -86,15 +65,14 @@ const HairForm = () => {
   };
 
   return (
-    <>
+    <div className='main'>
+      <InfoButton onClick={scrollToFooter} />
+
+      <ProfilePopup />
+
       {/* Navbar + Video + Heading */}
       <div className="heading">
-        <div
-          className={`navbar-bread-form ${showNavbar ? "visible" : "hidden"}`}
-          onClick={() => navigate("/")}
-        >
-          <h1>GWM</h1>
-        </div>
+        <Navbar className="navbar-bread-form" />
         <div className="background-video">
           <video src={party} autoPlay loop muted playsInline />
           <h2>HAIR DIMENSION</h2>
@@ -118,9 +96,9 @@ const HairForm = () => {
                   styles={customSelectStyles}
                 />
               </div>
-              <Link to="hair" className="inline-btn">
+              <button type="button" className="inline-btn" onClick={() => setPreview("hair")}>
                 i
-              </Link>
+              </button>
             </div>
 
             {/* Hairfall Patch */}
@@ -136,9 +114,9 @@ const HairForm = () => {
                   styles={customSelectStyles}
                 />
               </div>
-              <Link to="fall" className="inline-btn">
+              <button type="button" className="inline-btn" onClick={() => setPreview("fall")}>
                 i
-              </Link>
+              </button>
             </div>
 
             {/* Hair Length */}
@@ -164,15 +142,16 @@ const HairForm = () => {
 
         {/* RIGHT PREVIEW */}
         <div className="preview-container">
-          {location.pathname.includes("hair") ||
-          location.pathname.includes("hairfall") ? (
-            <Outlet />
-          ) : (
+          {preview === "hair" && <HairPreview />}
+          {preview === "fall" && <HairfallPreview />}
+          {!preview && (
             <img src={defaultImg} alt="default" className="preview-img" />
           )}
         </div>
       </div>
-    </>
+
+      <Footer ref={footerRef} />
+    </div>
   );
 };
 

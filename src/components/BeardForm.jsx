@@ -1,62 +1,43 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef, useContext } from "react";
 import Select from "react-select";
-import { useNavigate, Outlet, Link, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { faceShapes, beardTypes, volumeOptions } from "../data/formOptions";
+import { AuthContext } from '../context/AuthContext';
 import party from "../assets/party.mp4";
 import defaultImg from "../assets/Beard.jpeg";
+import userIcon from '../assets/user-icon.png';
+import FacePreview from './Beard-info-faceShape.jsx';
+import BeardPreview from './Beard-info-BreadType.jsx';
+
+import Footer from './layout/Footer';
+import Navbar from './layout/Navbar';
+import ProfilePopup from './layout/ProfilePopup';
+import InfoButton from './layout/InfoButton';
 
 import "../index.css";
 
 const BeardForm = () => {
   const navigate = useNavigate();
-  const location = useLocation();
+  const footerRef = useRef(null);
+
+  const scrollToFooter = () => {
+    footerRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   // State for form
   const [faceShape, setFaceShape] = useState(null);
   const [beardType, setBeardType] = useState(null);
   const [volumeOfBeard, setVolume] = useState(null);
 
-  // 👇 State for navbar visibility
-  const [showNavbar, setShowNavbar] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  // ✅ Scroll listener wrapped in useCallback
-  const controlNavbar = useCallback(() => {
-    if (window.scrollY > lastScrollY) {
-      setShowNavbar(false); // scrolling down → hide
-    } else {
-      setShowNavbar(true); // scrolling up → show
-    }
-    setLastScrollY(window.scrollY);
-  }, [lastScrollY]);
-
-  useEffect(() => {
-    window.addEventListener("scroll", controlNavbar);
-    return () => window.removeEventListener("scroll", controlNavbar);
-  }, [controlNavbar]);
+  // State for preview
+  const [preview, setPreview] = useState(null);
 
   // Options
-  const faceShapes = [
-    { value: "round", label: "Round" },
-    { value: "long", label: "Long" },
-    { value: "oval", label: "Oval" },
-    { value: "square", label: "Square" },
-    { value: "heart", label: "Heart" },
-    { value: "diamond", label: "Diamond" },
-    { value: "triangle", label: "Triangle" },
-  ];
+  
 
-  const beardTypes = [
-    { value: "uneven_patch", label: "Uneven Patch" },
-    { value: "light_cheeks", label: "Light on Cheeks" },
-    { value: "chin_only", label: "On Chin Only" },
-    { value: "light_connection", label: "Light Connection (Beard ↔ Mustache)" },
-  ];
+  
 
-  const volumeOptions = [
-    { value: "light", label: "Light" },
-    { value: "medium", label: "Medium" },
-    { value: "dense", label: "Dense" },
-  ];
+  
 
   const customSelectStyles = {
     control: (baseStyles) => ({
@@ -86,15 +67,14 @@ const BeardForm = () => {
   };
 
   return (
-    <>
+    <div className='main'>
+      <InfoButton onClick={scrollToFooter} />
+
+      <ProfilePopup />
+
       {/* Navbar + Video + Heading */}
       <div className="heading">
-        <div
-          className={`navbar-bread-form ${showNavbar ? "visible" : "hidden"}`}
-          onClick={() => navigate("/")}
-        >
-          <h1>GWM</h1>
-        </div>
+        <Navbar className="navbar-bread-form" />
         <div className="background-video">
           <video src={party} autoPlay loop muted playsInline />
           <h2>BEARD DIMENSION</h2>
@@ -118,9 +98,9 @@ const BeardForm = () => {
                   styles={customSelectStyles}
                 />
               </div>
-              <Link to="face" className="inline-btn">
+              <button type="button" className="inline-btn" onClick={() => setPreview("face")}>
                 i
-              </Link>
+              </button>
             </div>
 
             {/* Beard Type */}
@@ -136,9 +116,9 @@ const BeardForm = () => {
                   styles={customSelectStyles}
                 />
               </div>
-              <Link to="beard" className="inline-btn">
+              <button type="button" className="inline-btn" onClick={() => setPreview("beard")}>
                 i
-              </Link>
+              </button>
             </div>
 
             {/* Volume */}
@@ -164,15 +144,16 @@ const BeardForm = () => {
 
         {/* RIGHT PREVIEW */}
         <div className="preview-container">
-          {location.pathname.includes("face") ||
-          location.pathname.includes("beard") ? (
-            <Outlet />
-          ) : (
+          {preview === "face" && <FacePreview />}
+          {preview === "beard" && <BeardPreview />}
+          {!preview && (
             <img src={defaultImg} alt="default" className="preview-img" />
           )}
         </div>
       </div>
-    </>
+
+      <Footer ref={footerRef} />
+    </div>
   );
 };
 

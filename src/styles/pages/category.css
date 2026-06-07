@@ -1,0 +1,400 @@
+
+.category-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 60px;
+  padding: 20px;
+  margin: 0;
+}
+
+.category-hair,
+.category-beard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.category-hair img,
+.category-beard img {
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  height: 65vh;
+  width: 40vh;
+}
+
+.category-img-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.category-img-wrapper:hover img {
+  transform: scale(1);
+  box-shadow: none;
+}
+
+.hover-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.category-img-wrapper:hover .hover-img {
+  opacity: 1;
+}
+
+.base-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+.category-hair-label,
+.category-beard-label {
+  text-align: center;
+  margin-top: 10px;
+  font-family: 'Boska-Bold', serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #433b35;
+}
+
+.category-hair-label h2,
+.category-beard-label h2 {
+  font-family: 'Boska-Bold', serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: #433b35;
+  font-weight: normal;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.content-category {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: white;
+  text-align: center;
+}
+
+.content-category h1 {
+  font-family: 'Boska-Bold';
+  font-size: 150px;
+  margin: 0;
+  color: #e2e1e17c;
+}
+
+.content-category-family {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: white;
+  text-align: center;
+}
+
+.content-category-family h1 {
+  font-family: 'Boska-Bold';
+  font-size: 115px;
+  margin: 0;
+  color: #edededc5;
+}
+
+@media (max-width: 1024px) {
+  .category-section {
+    gap: clamp(60px, 10vw, 300px);
+    margin-top: -60px;
+    padding: 30px 0 40px 0;
+  }
+  .category-hair img,
+  .category-beard img {
+    width: clamp(240px, 22vw, 280px);
+    height: clamp(320px, 32vw, 350px);
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.386);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .category-hair-label h2,
+  .category-beard-label h2 {
+    font-size: 14px;
+    margin-top: 0;
+  }
+  .content-category h1 {
+    font-size: 110px;
+  }
+  .content-category-family h1 {
+    font-size: 90px;
+  }
+}
+
+@media (max-width: 768px) and (max-height: 1024px) {
+  .category-section {
+    gap: clamp(200px, 6vw, 100px);
+    margin-top: -40px;
+    padding: 20px 0 30px 0;
+    height: 58vh;
+  }
+  .category-hair img,
+.category-beard img {
+  width: clamp(240px, 22vw, 280px);
+  height: clamp(350px, 32vw, 320px);
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.386);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+
+}
+  .category-hair-label h2,
+  .category-beard-label h2 {
+    font-size: 14px;
+    margin-top: 0;
+  }
+  .content-category h1 {
+    font-size: 80px;
+  }
+  .content-category-family h1 {
+    font-size: 65px;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-section {
+    gap: clamp(100px, 4vw, 50px);
+    margin-top: -20px;
+    padding: 16px 0 24px 0;
+    flex-wrap: nowrap;
+    height: 40vh;
+  }
+  .category-hair img,
+.category-beard img {
+  width: clamp(140px, 22vw, 280px);
+  height: clamp(200px, 32vw, 320px);
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.386);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+
+}
+  .category-hair-label h2,
+  .category-beard-label h2 {
+    font-size: 14px;
+    margin-top: 0;
+  }
+  .content-category h1 {
+    font-size: 52px;
+  }
+  .content-category-family h1 {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 360px)  {
+  .category-section {
+    gap: 120px;
+    margin-top: -10px;
+    padding: 10px 0 16px 0;
+    height: 40vh;
+  }
+  .category-hair img,
+.category-beard img {
+  width: clamp(90px, 22vw, 280px);
+  height: clamp(150px, 32vw, 320px);
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.386);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+
+}
+  .category-hair-label h2,
+  .category-beard-label h2 {
+    font-size: 12px;
+    margin-top: 0;
+  }
+  .content-category h1 {
+    font-size: 38px;
+  }
+  .content-category-family h1 {
+    font-size: 30px;
+  }
+}
+
+.category-intro-text {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0;
+  padding: 20px 0 0 0;
+  line-height: 1;
+  z-index: 2;
+  position: relative;
+}
+
+.intro-which,
+.intro-wanna {
+  font-family: 'Boska-Bold';
+  font-size: 60px;
+  line-height: 0.85;
+  margin: 0;
+  color: #675c5a;
+  letter-spacing: 4px;
+}
+
+.intro-hit {
+  font-family: 'Telma-Medium';
+  font-size: 60px;
+  margin-top: -15px;
+  margin-bottom: 0;
+  line-height: 1;
+  color: #201e1ff7;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 1024px) {
+  .intro-which,
+  .intro-wanna {
+    font-size: 48px;
+    letter-spacing: 3px;
+  }
+  .intro-hit {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-intro-text {
+    padding: 14px 0 0 0;
+  }
+  .intro-which,
+  .intro-wanna {
+    font-size: 36px;
+    letter-spacing: 2px;
+  }
+  .intro-hit {
+    font-size: 24px;
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-intro-text {
+    padding: 10px 0 0 0;
+  }
+  .intro-which,
+  .intro-wanna {
+    font-size: 26px;
+    letter-spacing: 1px;
+  }
+  .intro-hit {
+    font-size: 18px;
+    letter-spacing: 0.5px;
+  }
+}
+
+@media (max-width: 360px) {
+  .intro-which,
+  .intro-wanna {
+    font-size: 20px;
+    letter-spacing: 0.5px;
+  }
+  .intro-hit {
+    font-size: 14px;
+  }
+}
+
+.clothing-category-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px;
+}
+
+.clothing-card {
+  position: relative;
+  cursor: pointer;
+  width: 18%;
+  min-width: 160px;
+}
+
+.clothing-card-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.clothing-card-wrapper img {
+  width: 100%;
+  display: block;
+  transition: opacity 0.4s ease;
+}
+
+.clothing-card-bw {
+  position: relative;
+  z-index: 1;
+}
+
+.clothing-card-color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  z-index: 2;
+}
+
+.clothing-card:hover .clothing-card-color {
+  opacity: 1;
+}
+
+.clothing-card-label {
+  text-align: center;
+  margin-top: 10px;
+  font-family: 'Boska-Bold', serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #433b35;
+}
+
+@media (max-width: 768px) {
+  .clothing-card {
+    width: 45%;
+  }
+}
+
+@media (max-width: 480px) {
+  .clothing-card {
+    width: 80%;
+  }
+}

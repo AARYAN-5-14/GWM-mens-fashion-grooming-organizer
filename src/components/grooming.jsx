@@ -1,16 +1,26 @@
-import React from 'react';
-
+import React, { useRef } from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import party from '../assets/party.mp4';
 import formal from '../assets/formal.mp4';
 import date from '../assets/date.mp4';
 import family from '../assets/family_gathering.mp4';
+import Footer from './layout/Footer';
+import Navbar from './layout/Navbar';
+import ProfilePopup from './layout/ProfilePopup';
+import InfoButton from './layout/InfoButton';
 
 const Grooming = () => {
   const navigate = useNavigate();
+  const footerRef = useRef(null);
+  
+  const scrollToFooter = () => { 
+    footerRef.current?.scrollIntoView({ behavior: 'smooth' }); 
+  };
   
   return (
     <div className='main'>
+      <InfoButton onClick={scrollToFooter} />
+      <ProfilePopup />
       <div className='video-container'>
         <div className='video-wrapper' onClick={() => navigate('party')}>
           <video src={party} autoPlay loop muted playsInline />
@@ -45,13 +55,13 @@ const Grooming = () => {
         <h1>GROOMING</h1>
         <p>Whats your Occasion</p>
       </div>
-      <div className='navbar' onClick= {() => navigate('/')}>
-        <h1>GWM</h1>
-      </div>
+      <Navbar className="navbar" />
 
       {/* Nested route content will render here */}
       
       <Outlet />
+      
+      <Footer ref={footerRef} />
     </div>
   );
 };
