@@ -97,11 +97,11 @@ Deployed on Vercel.
 Add environment variables in Vercel dashboard under Project Settings → Environment Variables.
 
 ## Author
-**Aaryan Sanu**  
+**Aaryan**  
 Information Science Engineering Student  
 DSATM Bengaluru  
 AWS Cloud Practitioner  
-LinkedIn: [Add your link]  
+LinkedIn: [www.linkedin.com/in/aaryan5]  
 GitHub: [Add your link]
 
 ## License
