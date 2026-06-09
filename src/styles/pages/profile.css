@@ -204,7 +204,7 @@
   left: 2%;
   transform: translateY(-50%);
   font-family: 'Boska-Bold', serif;
-  color: rgba(255, 255, 255, 0.852);
+  color: rgba(179, 146, 110, 0.8);
   font-size: clamp(36px, 8vw, 150px);
   text-align: left;
   z-index: 2;

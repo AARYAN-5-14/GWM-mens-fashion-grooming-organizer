@@ -9,7 +9,7 @@ import ProfilePopup from './layout/ProfilePopup';
 import InfoButton from './layout/InfoButton';
 import Footer from './layout/Footer';
 
-import bgVideo from '../assets/grooming.mp4';
+import bgVideo from '../assets/login-bg1.mp4';
 
 const sidebarItems = [
   { id: 'profile', label: 'Profile', icon: '◎' },

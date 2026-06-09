@@ -15,7 +15,7 @@ import Navbar from './layout/Navbar';
 import ProfilePopup from './layout/ProfilePopup';
 import InfoButton from './layout/InfoButton';
 import Footer from './layout/Footer';
-import bgVideo from '../assets/grooming.mp4';
+import bgVideo from '../assets/login-bg1.mp4';
 
 const MultiSelect = ({ label, options, selected, onChange, required }) => {
   const toggle = (value) => {
